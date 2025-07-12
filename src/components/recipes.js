@@ -34,14 +34,14 @@ const ArticleCard = ({ item, index, navigation }) => {
         onPress={() => navigation.navigate("RecipeDetail", { ...item })}
       >
         <Image
-          source={{ uri: item.thumbnail }}
+          source={{ uri: item.recipeImage }}
           style={[styles.articleImage, { height: index % 3 === 0 ? hp(25) : hp(35) }]}
         />
         <Text style={styles.articleText}>
-          {item.title.length > 20 ? item.title.slice(0, 20) + "..." : item.title}
+          {item.recipeName.length > 20 ? item.recipeName.slice(0, 20) + "..." : item.recipeName}
         </Text>
         <Text style={styles.articleDescription}>
-          {item.description.length > 40 ? item.description.slice(0, 40) + "..." : item.description}
+          {item.cookingDescription.length > 40 ? item.cookingDescription.slice(0, 40) + "..." : item.cookingDescription}
         </Text>
       </TouchableOpacity>
    
