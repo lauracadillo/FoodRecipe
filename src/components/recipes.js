@@ -13,15 +13,12 @@ export default function Recipe({ categories, foods }) {
   return (
     <View style={styles.container}>
       <View testID="recipesDisplay">
-        <FlatList
+      <FlatList
             data={foods}
-            keyExtractor={(item, index) => item.idMeal || index.toString()} // Or any unique key
+            keyExtractor={(item) => item.idFood}
             renderItem={renderItem}
             numColumns={2}
-            columnWrapperStyle={styles.row} // Optional: spacing between columns
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 20 }}
-        />
+          />
         
       </View>
     </View>
@@ -33,6 +30,20 @@ const ArticleCard = ({ item, index, navigation }) => {
     <View
       style={[styles.cardContainer, { paddingLeft: 20, paddingRight: 15}]} testID="articleDisplay"
     >
+        <TouchableOpacity
+        onPress={() => navigation.navigate("RecipeDetail", { ...item })}
+      >
+        <Image
+          source={{ uri: item.thumbnail }}
+          style={[styles.articleImage, { height: index % 3 === 0 ? hp(25) : hp(35) }]}
+        />
+        <Text style={styles.articleText}>
+          {item.title.length > 20 ? item.title.slice(0, 20) + "..." : item.title}
+        </Text>
+        <Text style={styles.articleDescription}>
+          {item.description.length > 40 ? item.description.slice(0, 40) + "..." : item.description}
+        </Text>
+      </TouchableOpacity>
    
     </View>
   );
