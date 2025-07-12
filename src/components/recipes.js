@@ -7,13 +7,22 @@ export default function Recipe({ categories, foods }) {
   const navigation = useNavigation();
 
   const renderItem = ({ item, index }) => (
-<ArticleCard item={item} index={index} navigation={navigation} />
+    <ArticleCard item={item} index={index} navigation={navigation} />
   );
 
   return (
     <View style={styles.container}>
       <View testID="recipesDisplay">
-            
+        <FlatList
+            data={foods}
+            keyExtractor={(item, index) => item.idMeal || index.toString()} // Or any unique key
+            renderItem={renderItem}
+            numColumns={2}
+            columnWrapperStyle={styles.row} // Optional: spacing between columns
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 20 }}
+        />
+        
       </View>
     </View>
   );

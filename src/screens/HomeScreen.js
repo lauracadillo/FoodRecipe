@@ -696,6 +696,7 @@ export default function HomeScreen() {
     },
   ]);
 
+  //category handling
   const handleChangeCategory = (category) => {
     setActiveCategory(category);
   };
@@ -729,7 +730,11 @@ export default function HomeScreen() {
         </View>
 
         <View testID="categoryList">
-       
+            <Categories
+                categories={categories}
+                activeCategory={activeCategory}
+                handleChangeCategory={handleChangeCategory}
+            />
         </View>
 
         <View testID="foodList">
