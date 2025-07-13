@@ -24,7 +24,7 @@ import {
     console.log('recipe',recipe);
     
     const favoriteRecipe = useSelector(
-      (state) => state.favorites.favoriterecipes
+      (state) => state.favorites.favoriteRecipes
     );
     console.log('favoriteRecipe from custom',favoriteRecipe);
     

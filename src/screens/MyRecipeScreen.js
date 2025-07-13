@@ -33,7 +33,7 @@ import {
     }, []);
   
     const handleAddrecipe = () => {
-        navigation.navigate("RecipeFormScreen");
+        navigation.navigate("RecipesFormScreen");
 
     };
   
