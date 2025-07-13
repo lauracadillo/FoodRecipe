@@ -12,11 +12,11 @@ export default function RecipeDetailScreen(props) {
   const recipe = props.route.params; // recipe passed from previous screen
 
   const dispatch = useDispatch();
-  const favoriterecipes = useSelector(
-    (state) => state.favorites.favoriterecipes
+  const favoriteRecipes = useSelector(
+    (state) => state.favorites.favoriteRecipes
   );
-  const isFavourite = favoriterecipes?.some(
-    (favrecipe) => favrecipe.idFood === recipe.idFood
+  const isFavourite = favoriteRecipes?.some(
+    (favrecipe) => favrecipe.recipeId === recipe.recipeId
   ); // Check by idrecipe
 
   const navigation = useNavigation();

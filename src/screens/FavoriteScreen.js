@@ -17,19 +17,13 @@ import {
 export default function FavoriteScreen() {
   const navigation = useNavigation();
 
-  // Assuming you have a similar structure for recipes in your Redux store
-  const favoriteRecipes = useSelector((state) => state.favorites);
-  const favoriteRecipesList = favoriteRecipes?.favoriterecipes || [];
-  console.log(favoriteRecipes.favoriterecipes);
-  console.log('favoriteRecipesList',favoriteRecipesList);
-  
-  
+  const favoriteRecipes = useSelector((state) => state.favorites.favoriteRecipes); // fixed selector
+  const favoriteRecipesList = favoriteRecipes || [];
 
   if (favoriteRecipesList.length === 0) {
     return (
       <View style={styles.emptyContainer}>
         <Text style={styles.emptyText}>No favorite recipes yet!</Text>
-        {/* add back button */}
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={{
@@ -38,49 +32,29 @@ export default function FavoriteScreen() {
             borderRadius: 5,
             marginTop: 10,
             width: 100,
-            alignItems: "center ",
+            alignItems: "center",
           }}
         >
           <Text style={{ color: "#fff" }}>Go back</Text>
         </TouchableOpacity>
-
-        <FlatList
-        data={favoriteRecipesList}
-        contentContainerStyle={styles.listContentContainer}
-        keyExtractor={(item) => item.idFood} // Update the key according to your article data
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.cardContainer}
-            onPress={() => navigation.navigate("ArticleDetail", item)} // Navigate to the article detail screen
-          >
-            <Image
-              source={{ uri: item.thumbnail }} // Assuming your articles have a thumbnail field
-              style={styles.articleImage}
-            />
-            <Text style={styles.articleTitle}>
-              {item.title.length > 20
-                ? `${item.title.slice(0, 20)}...`
-                : item.title}
-            </Text>
-          </TouchableOpacity>
-        )}
-      />
       </View>
     );
   }
 
   return (
-    <>
-      {/* Heading */}
-      <View testID="FavoriteRecipes">
-        <Text
-          style={{ fontSize: hp(3.8), marginTop: hp(4), marginLeft: 20 }}
-          className="font-semibold text-neutral-600"
-        >
-          My Favorite Recipes
-        </Text>
-      </View>
-    
+    <View style={{ flex: 1 }}>
+      <Text
+        style={{
+          fontSize: hp(3.8),
+          marginTop: hp(4),
+          marginLeft: 20,
+          fontWeight: "600",
+          color: "#4B5563",
+        }}
+      >
+        My Favorite Recipes
+      </Text>
+
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={{
@@ -99,14 +73,14 @@ export default function FavoriteScreen() {
       <FlatList
         data={favoriteRecipesList}
         contentContainerStyle={styles.listContentContainer}
-        keyExtractor={(item) => item.idFood} // Update the key according to your article data
+        keyExtractor={(item) => item.recipeId.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.cardContainer}
-            onPress={() => navigation.navigate("RecipeDetail", item)} // Navigate to the article detail screen
+            onPress={() => navigation.navigate("RecipeDetail", item)}
           >
             <Image
-              source={{ uri: item.recipeImage }} // Assuming your articles have a thumbnail field
+              source={{ uri: item.recipeImage }}
               style={styles.recipeImage}
             />
             <Text style={styles.recipeTitle}>
@@ -117,10 +91,10 @@ export default function FavoriteScreen() {
           </TouchableOpacity>
         )}
       />
-    
-    </>
+    </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   emptyContainer: {
